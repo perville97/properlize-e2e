@@ -1,33 +1,26 @@
-Propelize E2E Test Project – Partie 2 🚀
-Ce dépôt contient la configuration CI/CD pour l'exécution automatique des tests front-end Playwright de l’application Propelize.
+              Propelize E2E Test Project – Partie 2
 
-⚙️ Pipeline CI/CD avec GitHub Actions
-Le workflow ci.yml est situé dans .github/workflows/ et a été conçu pour automatiser l'intégration continue, avec :
+Ce dépôt contient l'implémentation complète des **tests end-to-end** pour l’application Propelize, en combinant **Docker**, **Playwright** et **GitHub Actions** pour une automatisation CI/CD maîtrisée. Le projet couvre les trois interfaces principales de Propelize, avec une logique utilisateur simulée côté Express.js.
 
-✅ Déclenchement automatique sur push et pull_request vers la branche main
 
-📦 Installation des dépendances via npm install
 
-🛠 Installation des navigateurs Playwright avec npx playwright install --with-deps
+                 Interfaces testées
 
-🧪 Lancement des tests front-end Playwright
+- 🔐 Connexion utilisateur (`/login`)
+- 🚗 Tableau de bord véhicules (`/vehicles`)
+- 👤 Gestion des utilisateurs (`/users`)
 
-📤 Génération d’un rapport HTML et upload en tant qu’artifact
+Tous les tests sont écrits avec [Playwright](https://playwright.dev/), lancé dans un conteneur Docker dédié à l’environnement de test.
 
-🔧 Serveur Express automatique
-Le serveur local (server.js) est lancé automatiquement avant les tests grâce à la configuration suivante dans playwright.config.ts :
 
-ts
-webServer: {
-  command: 'node server.js',
-  port: 3000,
-  timeout: 30 * 1000,
-  reuseExistingServer: true,
-}
-📁 Lancer les tests en local
-bash
-npm install                   # Installer les dépendances
-node server.js                # Démarrer le serveur Express
-npx playwright test           # Lancer les tests
-✅ Conclusion
-Tous les objectifs CI/CD du TP Propelize ont été atteints avec rigueur : la configuration GitHub Actions assure une exécution fiable, reproductible et traçable des tests E2E front-end. Le pipeline est prêt pour de véritables scénarios d’intégration continue.
+
+           Dockerisation
+
+Le projet utilise une image basée sur Playwright `v1.53.2` pour garantir la compatibilité avec les navigateurs embarqués.
+
+              Dockerfile
+FROM mcr.microsoft.com/playwright:v1.53.2
+WORKDIR /app
+COPY . .
+RUN npm install
+CMD ["npx", "playwright", "test"]
