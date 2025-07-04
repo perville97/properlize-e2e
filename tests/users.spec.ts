@@ -7,6 +7,5 @@ test('Ajout d’un utilisateur via le formulaire', async ({ page }) => {
   await page.fill('input[name="password"]', 'monMotDePasse');
   await page.click('button[type="submit"]');
 
-  // Attente que la page se recharge et affiche la nouvelle liste
-  await expect(page.locator('ul')).toContainText('Utilisateur 3');
+  await expect(page.locator('table')).toContainText('Utilisateur 3');
 });

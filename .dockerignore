@@ -1,2 +1,16 @@
-node_modules
-dist
+# ✅ Ignorer les dépendances locales
+node_modules/
+
+# ✅ Ignorer les fichiers de build (si tu en génères)
+dist/
+
+# ✅ Ignorer les artefacts de test
+test-results/
+playwright-report/
+
+# ✅ Ignorer les logs
+*.log
+
+# ✅ Ignorer les fichiers système
+.DS_Store
+Thumbs.db
